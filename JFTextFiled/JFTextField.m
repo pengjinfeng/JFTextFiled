@@ -9,6 +9,8 @@
 #import "JFTextField.h"
 
 @implementation JFTextField
+@synthesize delegate;
+
 - (id)initWithLeftButton:(NSString *)leftImage rightButton:(NSString *)rightImage{
     if (self = [super init]) {
         if (leftImage) {

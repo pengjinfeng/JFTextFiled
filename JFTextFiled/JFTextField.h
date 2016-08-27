@@ -38,7 +38,7 @@
  */
 - (id)initWithLeftButton:(NSString *)leftImage rightButton:(NSString *)rightImage;
 @end
-@protocol JFTextFieldDelegate <NSObject>
+@protocol JFTextFieldDelegate <UITextFieldDelegate>
 //左边按钮index为0，右边为1
 - (void)textFiledButton:(UITextField *)textFiled atIndex:(NSInteger)index;
 
