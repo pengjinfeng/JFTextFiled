@@ -5,12 +5,10 @@
 //  Created by apple on 16/5/21.
 //  Copyright © 2016年 pengjf. All rights reserved.
 //
-#define BUTTON_SIZE CGSizeMake(30, 30)
+#define BUTTON_SIZE CGSizeMake(self.bounds.size.height, self.bounds.size.height)
 #import <UIKit/UIKit.h>
-@protocol JFTextFieldDelegate;
 @interface JFTextField : UITextField
 
-@property (nonatomic,weak)id<JFTextFieldDelegate>delegate;
 
 @property (nonatomic,strong)UIButton *leftImageButton;
 @property (nonatomic,strong)UIButton *rightImageButton;
@@ -18,10 +16,18 @@
 @property (nonatomic,assign)CGFloat placehoderOffset;
 //编辑的时候光标的偏移量
 @property (nonatomic,assign)CGFloat editingCursorOffset;
-//文字显示的偏移量
-@property (nonatomic,assign)CGFloat textOffset;
 //placehoder字体大小,默认17.0
 @property (nonatomic,assign)CGFloat placehoderFont;
+//编辑完成后文本的偏移量
+@property (nonatomic,assign)CGFloat textOffset;
+//placehoder颜色
+@property (nonatomic,strong)UIColor *placehoderColor;
+//  改变前的内容
+@property (nonatomic, copy) NSString    *previousTextFieldContent;
+//改变前的光标
+@property (nonatomic, copy) UITextRange *previousTextFieldTextRange;
+//是否将手机号码用空格分开，是否是手机号码还需要自己去判断使用正则表达式
+@property (nonatomic,assign)BOOL isPhoneSpace;
 
 
 //确认按钮的样式
@@ -36,10 +42,8 @@
  *
  *  @return 左右都有button的按钮的textFiled
  */
-- (id)initWithLeftButton:(NSString *)leftImage rightButton:(NSString *)rightImage;
-@end
-@protocol JFTextFieldDelegate <UITextFieldDelegate>
-//左边按钮index为0，右边为1
-- (void)textFiledButton:(UITextField *)textFiled atIndex:(NSInteger)index;
+- (id)initWithLeftButton:(NSString *)leftImage rightButton:(NSString *)rightImage selector:(SEL)sel target:(id)target;
 
+#pragma mark -- 此方法添加左右btn，xib文件拉取的需要自己手动添加
+- (void)setedImageButton:(NSString *)imageName isRight:(BOOL)isRight selector:(SEL)sel target:(id)target;
 @end

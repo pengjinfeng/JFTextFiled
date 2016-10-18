@@ -8,34 +8,40 @@
 
 #import "ViewController.h"
 #import "JFTextField.h"
-@interface ViewController ()<JFTextFieldDelegate>
-
+@interface ViewController ()<UITextFieldDelegate>
+@property (nonatomic,weak)IBOutlet JFTextField * text;
+@property (nonatomic,weak)IBOutlet UILabel * label;
 @end
 
 @implementation ViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    JFTextField *text = [[JFTextField alloc] initWithLeftButton:@"pp_search" rightButton:@"pj_photo"];
-    text.delegate = self;
-    text.frame = CGRectMake(60, 200, 200, 30);
-    text.backgroundColor  = [UIColor colorWithRed:233/255.0f green:233/255.0f blue:233/255.0f alpha:1.0f];
-    text.placeholder = @"请输入...";
-    text.placehoderOffset = 30.0f;
-    text.editingCursorOffset = 30.0f;
-    text.placehoderFont = 14.0f;
-    [self.view addSubview:text];
+    
+    self.text.delegate = self;
+    self.text.placeholder = @"请输入手机号码";
+    self.text.textOffset = 40.0f;
+    self.text.placehoderOffset = 40.0;
+    self.text.editingCursorOffset = 40.0f;
+    self.text.placehoderColor = [UIColor redColor];
+    
+    //开启空格分隔
+    self.text.isPhoneSpace = YES;
+    [self.text setedImageButton:@"pj_photo" isRight:NO selector:@selector(left:) target:self];
+     [self.text setedImageButton:@"pp_search" isRight:YES selector:@selector(left:) target:self];
+    
 }
-- (void)textFiledButton:(UITextField *)textFiled atIndex:(NSInteger)index{
-    if (index == 0) {
-        NSLog(@"点击左边的按钮");
-    }else if (index == 1){
-        NSLog(@"点击右边的按钮");
-    }else{
-        
-    }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    self.label.text = [self.text.text stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
+- (void)left:(UIButton *)sender{
+    NSLog(@"test success");
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.text resignFirstResponder];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
