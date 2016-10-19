@@ -46,4 +46,6 @@
 
 #pragma mark -- 此方法添加左右btn，xib文件拉取的需要自己手动添加
 - (void)setedImageButton:(NSString *)imageName isRight:(BOOL)isRight selector:(SEL)sel target:(id)target;
+
+- (void)shakeWithView:(UIView *)view duration:(NSTimeInterval)duration;
 @end

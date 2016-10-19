@@ -139,6 +139,33 @@
     return numberAndSpaceString;
 }
 
+//抖动的方法
+- (void)shakeWithView:(UIView *)view duration:(NSTimeInterval)duration{
+    CAKeyframeAnimation *animation = [[CAKeyframeAnimation alloc] init];
+    animation.keyPath = @"transform.translation.x";
+    CGFloat currentTx = view.transform.tx;
+    animation.delegate =view;
+    animation.duration = duration;
+    animation.values = @[@(currentTx),@(currentTx + 10),@(currentTx - 8),@(currentTx + 8),@(currentTx - 5),@(currentTx + 5),@(currentTx)];
+    animation.keyTimes = @[@(0),@(0.225),@(0.426),@(0.6),@(0.75),@(0.875),@(1)];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    [view.layer addAnimation:animation forKey:@"kAFViewShakerAnimationKey"];
+}
+
+//抖动的方法
+//func shake(view:UIView,duration:NSTimeInterval = 0.5){
+//    
+//    let animation:CAKeyframeAnimation = CAKeyframeAnimation.init(keyPath: "transform.translation.x")
+//    let currentTx = view.transform.tx
+//    animation.delegate = view
+//    animation.duration = duration
+//    animation.values = [currentTx,currentTx + 10,currentTx - 8,currentTx + 8,currentTx - 5,currentTx + 5,currentTx]
+//    animation.keyTimes = [0,0.225,0.426,0.6,0.75,0.875,1]
+//    
+//    animation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+//    view.layer.addAnimation(animation, forKey: "kAFViewShakerAnimationKey")
+//}
+
 
 
 //  重写占位符的x值

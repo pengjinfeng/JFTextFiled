@@ -30,6 +30,7 @@
     [self.text setedImageButton:@"pj_photo" isRight:NO selector:@selector(left:) target:self];
      [self.text setedImageButton:@"pp_search" isRight:YES selector:@selector(left:) target:self];
     
+    
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -37,6 +38,7 @@
 }
 - (void)left:(UIButton *)sender{
     NSLog(@"test success");
+    [self.text shakeWithView:self.text duration:0.5];
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.text resignFirstResponder];
